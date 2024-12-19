@@ -11,11 +11,21 @@ internal class ProtoEnumConverter : InternalConverter
     private readonly Dictionary<int, JsonEncodedText> _reversedLookup;
     private readonly Type _clrType;
 
+    private static string StripEnumPrefix(string value, string enumName)
+    {
+        if(value == null) return null;
+        if(value.StartsWith(enumName + "_"))
+        {
+            return value.Substring(enumName.Length + 1);
+        }
+        return value;
+    }
+
     public ProtoEnumConverter(EnumDescriptor fieldInfoEnumType, JavaScriptEncoder? encoder)
     {
         _clrType = fieldInfoEnumType.ClrType;
-        _lookup = fieldInfoEnumType.Values.ToDictionary(x => x.Name, x => x.Number);
-        _reversedLookup = fieldInfoEnumType.Values.ToDictionary(x => x.Number, x => JsonEncodedText.Encode(x.Name, encoder));
+        _lookup = fieldInfoEnumType.Values.ToDictionary(x => StripEnumPrefix(x.Name, _clrType.Name), x => x.Number);
+        _reversedLookup = fieldInfoEnumType.Values.ToDictionary(x => x.Number, x => JsonEncodedText.Encode(StripEnumPrefix(x.Name, _clrType.Name), encoder));
     }
     
     public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
