@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -112,6 +113,34 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
         return obj;
     }
 
+    private static Dictionary<Type, object?> defaults = new();
+    private static object? GetDefaultValue(Type fieldType)
+    {
+        if (fieldType.IsValueType)
+        {
+            if(defaults.TryGetValue(fieldType, out var defaultValue))
+            {
+                return defaultValue;
+            }
+            else
+            {
+                var defaultExpression = Expression.Default(fieldType);
+                var value = Expression.Lambda(defaultExpression).Compile().DynamicInvoke();
+                defaults.Add(fieldType, value);
+                return value;
+            }
+        }
+        else if(fieldType == typeof(String))
+        {
+            return string.Empty;
+        }
+        else if(fieldType == typeof(ByteString))
+        {
+            return ByteString.Empty;
+        }
+        return null;
+    }
+
     public override void Write(Utf8JsonWriter writer, T? value, JsonSerializerOptions options)
     {
         if (value == null)
@@ -136,6 +165,15 @@ internal class ProtobufConverter<T> : JsonConverter<T?> where T : class, IMessag
                 {
                     writer.WritePropertyName(fieldInfo.JsonName);
                     fieldInfo.Converter.Write(writer, propertyValue, options); 
+                }
+                else if (_defaultIgnoreCondition is JsonIgnoreCondition.WhenWritingDefault)
+                {
+                    var defaultValue = GetDefaultValue(fieldInfo.FieldType);
+                    if (propertyValue.Equals(defaultValue) == false)
+                    {
+                        writer.WritePropertyName(fieldInfo.JsonName);
+                        fieldInfo.Converter.Write(writer, propertyValue, options);
+                    }
                 }
             }
             else if (obj is null && _defaultIgnoreCondition == JsonIgnoreCondition.Never)

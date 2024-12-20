@@ -1,5 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protobuf.System.Text.Json", "src\Protobuf.System.Text.Json\Protobuf.System.Text.Json.csproj", "{AE98589A-143B-41D2-9C20-1C071BA203AC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Protobuf.System.Text.Json.Tests", "test\Protobuf.System.Text.Json.Tests\Protobuf.System.Text.Json.Tests.csproj", "{97FF3953-1E5F-4D06-95A3-1956448C8E6F}"
@@ -44,6 +47,9 @@ Global
 		{FD123B7C-200D-4EB1-85AF-688A38E5EF4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD123B7C-200D-4EB1-85AF-688A38E5EF4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD123B7C-200D-4EB1-85AF-688A38E5EF4D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DC053104-9F7E-493E-AB1E-2376BB5B3029} = {618C7565-3ABA-429E-BCAE-69D7F671AF5B}

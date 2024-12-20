@@ -31,6 +31,7 @@ internal class ProtoEnumConverter : InternalConverter
     public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
     {
         var intValue = (int) value;
+
         if (_reversedLookup.TryGetValue(intValue, out var stringValue))
         {
             writer.WriteStringValue(stringValue);

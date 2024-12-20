@@ -41,4 +41,6 @@ public class JsonProtobufSerializerOptions
     /// </summary>
     /// 
     public bool UseStringProtoEnumValueNames { get; set; }
+
+    //public bool 
 }

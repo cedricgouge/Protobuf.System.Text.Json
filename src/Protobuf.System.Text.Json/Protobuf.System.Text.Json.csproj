@@ -1,9 +1,9 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <Summary>System.Text.Json extensions for Protobuf types.</Summary>
         <Description>System.Text.Json extensions for Protobuf types.</Description>
-        <TargetFrameworks>net8.0;net6.0;netstandard2.0;netstandard2.1</TargetFrameworks>
+        <TargetFrameworks>net8.0</TargetFrameworks>
         <LangVersion>12</LangVersion>
         <PackageProjectUrl>https://github.com/Havret/System.Text.Json.Protobuf</PackageProjectUrl>
         <PackageId>Protobuf.System.Text.Json</PackageId>
@@ -14,7 +14,7 @@
         <EmbedUntrackedSources>true</EmbedUntrackedSources>
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <Authors>Havret</Authors>
+        <Authors>Cédric Gouge</Authors>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -22,8 +22,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Google.Protobuf" Version="3.27.1" />
-        <PackageReference Include="System.Text.Json" Version="8.0.3" />
+        <PackageReference Include="Google.Protobuf" Version="3.29.2" />
+        <PackageReference Include="System.Text.Json" Version="9.0.0" />
     </ItemGroup>
 
 </Project>

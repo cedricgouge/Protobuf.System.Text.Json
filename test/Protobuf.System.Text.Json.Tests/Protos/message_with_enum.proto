@@ -12,3 +12,15 @@ enum TestEnum {
   FIRST_OPTION = 1;
   SECOND_OPTION = 2;
 }
+
+message MessageWithEnum2 {
+	TestEnum2 enum_field = 1;
+	bool bool_field = 2;
+	double double_field = 3;
+}
+
+enum TestEnum2 {
+	TestEnum2_UNKNOWN = 0;
+	TestEnum2_FIRST_OPTION = 1;
+	TestEnum2_SECOND_OPTION = 2;
+}
